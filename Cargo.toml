@@ -1,0 +1,21 @@
+[package]
+name = "archlinux"
+version = "0.1.0"
+authors = ["tkirishima <tkirishima@proton.me>"]
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+serde = { version = "1.0.197", features = ["derive"] }
+
+dioxus = { git = "https://github.com/DioxusLabs/dioxus", features = ["fullstack", "router"] }
+
+# Debug
+log = "0.4.19"
+dioxus-logger = "0.4.1"
+
+[features]
+default = []
+server = ["dioxus/axum"]
+web = ["dioxus/web"]

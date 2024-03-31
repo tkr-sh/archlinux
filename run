@@ -1,0 +1,41 @@
+#!/usr/bin/env sh
+
+# dx build --features web --release
+# dx build --features web --release
+
+# Remove sass
+pkill -9 -f sass
+
+
+# Check if 'sass' command is available in the environment
+if which sass &> /dev/null; then
+    if sass --help | grep -q "Dart"; then
+        sass --no-source-map --watch src:public/style &
+    else
+        echo "Dart is not supported by Sass."
+        sass --sourcemap=none --watch src:public/style &
+    fi
+else
+    echo "Sass is not installed."
+    exit 1;
+fi
+
+
+# cargo run --features ssr --release &
+dx serve &
+
+
+while true; do
+    # Use inotifywait to monitor file changes recursively
+    inotifywait -m ./src -e create -e moved_to --include '.*\.scss$' |
+    while read -r directory action file; do
+        pkill -f "sass"
+        sass --no-source-map --watch src:public/style &
+        # cargo run --features ssr &
+    done
+
+#     # When any file changes, relaunch the command
+#     echo "File changed. Relaunching command..."
+
+#     cargo run --features ssr --release
+done

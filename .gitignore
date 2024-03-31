@@ -1,0 +1,5 @@
+/public/style/*
+!/public/style/style.css
+.dioxus
+dist
+target

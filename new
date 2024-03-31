@@ -1,0 +1,122 @@
+#!/usr/bin/env ruby
+
+require 'pathname'
+
+#############
+# FUNCTIONS #
+#############
+def snake_to_pascal(snake_string)
+  snake_string.split('_').map(&:capitalize).join
+end
+
+def pascal_to_snake(pascal_string)
+  pascal_string.gsub(/([a-z])([A-Z])/, '\1_\2').downcase
+end
+
+
+#########
+# FILES #
+#########
+front_rs = 'use dioxus::prelude::*;
+
+#[component]
+pub fn ComponentName() -> Element {
+
+    rsx! {
+        div {
+            class: "ComponentName",
+        }
+    }
+}'
+
+mod_rs = 'pub mod front;'
+
+back_rs = 'use dioxus_fullstack::prelude::*;
+
+#[server(ComponentName, "/api/component_name")]
+pub async fn component_name() -> Result<(), ServerFnError> {
+    let pool = get_pool()?;
+
+    Ok(())
+}'
+
+style_scss = '@import "path";
+
+.ComponentName {
+}'
+
+
+################
+# MAIN PROGRAM #
+################
+abort 'No `src` directory.' unless Dir.exist?('src')
+Dir.chdir('src')
+
+# Get if it's a page
+print 'Is it a page ? [Y/n] > '
+rep = $stdin.gets.chomp
+
+# Go in the correct dir
+dir_name = rep.downcase != 'n' ? 'pages' : 'components'
+
+Dir.mkdir(dir_name) unless Dir.exist?(dir_name)
+Dir.chdir dir_name
+
+
+# Create the dir
+print "What is the name of the #{dir_name.chop} that you want to create >"
+rep = $stdin.gets.chomp
+rep = pascal_to_snake(rep)
+
+abort "`#{rep}` already exists?" if Dir.exist?(rep)
+
+# Go to the dir
+Dir.mkdir rep
+Dir.chdir rep
+
+# Create each file
+files = {
+  'front.rs' => front_rs,
+  # 'back.rs' => back_rs,
+  'style.scss' => style_scss,
+  'mod.rs' => mod_rs,
+}
+
+files.each do |key, value|
+  component_pascal = snake_to_pascal(rep)
+  component_snake = pascal_to_snake(rep)
+  path = '../../style/constants.scss'
+
+  content = value
+  content.gsub!('ComponentName', component_pascal)
+  content.gsub!('component_name', component_snake)
+  content.gsub!('path', path)
+
+  File.open(key, 'w') do |file|
+    file.puts content
+  end
+end
+
+
+# Update the mod.rs
+Dir.chdir '..'
+directories = Dir.glob('*').select { |entry| File.directory?(entry) }
+content = directories.map{ "pub mod #{_1};" } * "\n"
+
+File.open('mod.rs', 'w') do |file|
+  file.puts content
+end
+
+
+scss_files = []
+Dir.chdir '..'
+base_pathname = Pathname.new("*")
+
+Dir.glob(base_pathname.join('**', '*.scss').to_s).each do |file| 
+  scss_files << file if File.file?(file)
+end
+
+
+File.open("./style.scss", 'w') do |file|
+  file.puts scss_files.filter{_1 != "style;scss"}.map{"@import \"#{_1}\";"} * "\n"
+end
