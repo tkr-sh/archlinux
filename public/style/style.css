@@ -1,6 +1,233 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+:root {
+  --fg: #fff;
+  --fg-5: #eee;
+  --fg-10: #ddd;
+  --fg-20: #bbb;
+  --bg: #000;
+  --bg-5: #111;
+  --bg-7-5: #191919;
+  --bg-10: #222;
+  --bg-20: #444;
+  --fgcolor: #aaf0ff;
+}
+
+:root {
+  --fg: #fff;
+  --fg-5: #eee;
+  --fg-10: #ddd;
+  --fg-20: #bbb;
+  --bg: #000;
+  --bg-5: #111;
+  --bg-7-5: #191919;
+  --bg-10: #222;
+  --bg-20: #444;
+  --fgcolor: #aaf0ff;
+}
+
+.colored-text {
+  background-size: 150% 100%;
+  background-position-x: 0;
+  background-clip: text;
+  color: transparent;
+  transition: 0.5s;
+}
+.colored-text:not(.white):hover {
+  background-position-x: 100%;
+}
+.colored-text.white {
+  background-image: linear-gradient(to bottom right, var(--fg), var(--fg-5), #888);
+}
+.colored-text.black {
+  background-image: linear-gradient(to bottom right, #888, var(--bg), var(--bg-5));
+}
+.colored-text.blue {
+  background-image: linear-gradient(to bottom right, #0cf, #0be, #07b, #059);
+}
+.colored-text.dark-blue {
+  background-image: linear-gradient(to bottom right, #08f, #06e, #03b, #019);
+}
+.colored-text.purple {
+  background-image: linear-gradient(to bottom right, #c0f, #b0e, #70b, #509);
+}
+.colored-text.red {
+  background-image: linear-gradient(to bottom right, #f56, #d23, #b12, #801);
+}
+
+:root {
+  --fg: #fff;
+  --fg-5: #eee;
+  --fg-10: #ddd;
+  --fg-20: #bbb;
+  --bg: #000;
+  --bg-5: #111;
+  --bg-7-5: #191919;
+  --bg-10: #222;
+  --bg-20: #444;
+  --fgcolor: #aaf0ff;
+}
+
+.Rectbutton {
+  border-radius: 8px;
+  font-weight: 600;
+  padding: 16px max(2vw, 16px);
+  font-size: 18px;
+  transition: 0.5s;
+}
+.Rectbutton:hover {
+  transform: scale(1.1);
+}
+.Rectbutton.white {
+  background: white;
+  color: #000;
+}
+.Rectbutton.white:hover {
+  background: #dee;
+}
+.Rectbutton.color {
+  background: rgba(0, 0, 0, 0);
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 50%, #0cf, #0be, #07b);
+  background-size: 100% 300%;
+  color: var(--fg);
+  border: 2px solid #0f94d2;
+  position: relative;
+}
+.Rectbutton.color::after {
+  pointer-events: none;
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background-image: radial-gradient(ellipse 65px 40px, rgba(18, 141, 175, 0.5019607843), rgba(0, 0, 0, 0));
+  transform: translate(-50%, -50%);
+  width: 200%;
+  height: 200%;
+  z-index: 0;
+}
+.Rectbutton.color span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  position: relative;
+}
+.Rectbutton.color:hover {
+  background-position-y: 100%;
+  border-color: rgba(0, 0, 0, 0);
+}
+.Rectbutton.color:hover::after {
+  opacity: 0;
+}
+@media (width <= 700px) {
+  .Rectbutton {
+    padding-inline: 30px !important;
+  }
+}
+
+:root {
+  --fg: #fff;
+  --fg-5: #eee;
+  --fg-10: #ddd;
+  --fg-20: #bbb;
+  --bg: #000;
+  --bg-5: #111;
+  --bg-7-5: #191919;
+  --bg-10: #222;
+  --bg-20: #444;
+  --fgcolor: #aaf0ff;
+}
+
+:root {
+  --fg: #fff;
+  --fg-5: #eee;
+  --fg-10: #ddd;
+  --fg-20: #bbb;
+  --bg: #000;
+  --bg-5: #111;
+  --bg-7-5: #191919;
+  --bg-10: #222;
+  --bg-20: #444;
+  --fgcolor: #aaf0ff;
+}
+
+@keyframes blue {
+  0% {
+    opacity: 0.5;
+  }
+  5% {
+    opacity: 1;
+  }
+  20% {
+    opacity: 1;
+  }
+  30% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes purple {
+  0% {
+    opacity: 0;
+  }
+  20% {
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  45% {
+    opacity: 1;
+  }
+  55% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes dark-blue {
+  0% {
+    opacity: 0;
+  }
+  45% {
+    opacity: 0;
+  }
+  55% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes red {
+  0% {
+    opacity: 0;
+  }
+  70% {
+    opacity: 0;
+  }
+  80% {
+    opacity: 1;
+  }
+  95% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.5;
+  }
+}
 .Home {
-  background: #000;
+  background: var(--bg);
 }
 .Home > header {
   width: calc(100% - 20px);
@@ -47,7 +274,10 @@
 }
 .Home .logo {
   height: 100vh;
+  max-height: 100vh;
   width: 100vw;
+  overflow-x: hidden;
+  overflow-y: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -55,12 +285,12 @@
   position: relative;
 }
 .Home .logo .gradient {
-  background-image: radial-gradient(circle at 50% -40%, #128daf, rgba(0, 0, 0, 0));
+  background-image: radial-gradient(100% 110% at 50% -45%, #128daf, rgba(0, 0, 0, 0));
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 150%;
 }
 .Home .logo .wrap-binary {
   position: absolute;
@@ -71,7 +301,7 @@
 }
 .Home .logo .wrap-binary .binary {
   width: 70vw;
-  color: rgba(170, 240, 255, 0.5019607843);
+  color: var(--fgcolor);
   font-weight: 600;
   display: flex;
   flex-direction: column;
@@ -85,7 +315,7 @@
 }
 .Home .logo .wrap-binary.right .binary {
   text-align: right;
-  transform: rotateY(-55deg) translate(20%, -20%);
+  transform: rotateY(-55deg) translate(10%, -20%);
   mask: linear-gradient(45deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0) 33%, #000);
 }
 .Home .logo main {
@@ -115,7 +345,7 @@
   transition: 0.5s;
 }
 .Home .logo main h1 .white {
-  background-image: linear-gradient(to bottom right, #fff, #eee, #888);
+  background-image: linear-gradient(to bottom right, var(--fg), var(--fg-5), #888);
 }
 .Home .logo main h1 .blue {
   background-image: linear-gradient(to bottom right, #0cf, #0be, #07b, #059);
@@ -124,11 +354,526 @@
   background-position-x: 100%;
 }
 .Home .logo main p {
-  color: rgba(255, 255, 255, 0.8666666667);
+  color: var(--fg);
+  opacity: 0.8;
   font-weight: 500;
   white-space: pre;
   text-align: center;
 }
+.Home .logo main .buttons {
+  margin-top: 10px;
+  display: flex;
+  gap: 16px;
+}
+.Home .package {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+.Home .package h1 {
+  color: var(--fg);
+  font-size: 75px;
+  margin-block: 2px;
+}
+.Home .package .others h2 {
+  margin-block: 2px;
+}
+.Home .package .gradient {
+  background-image: radial-gradient(50% 50%, rgba(18, 141, 175, 0.3137254902), rgba(0, 0, 0, 0));
+  position: absolute;
+  top: 0;
+  left: 50%;
+  height: 100%;
+  aspect-ratio: 1.4/1;
+  transform: translate(-50%);
+}
+.Home .package .gradient.purple {
+  background-image: radial-gradient(50% 50%, rgba(136, 119, 204, 0.3333333333), rgba(0, 0, 0, 0));
+}
+.Home .package .gradient.dark-blue {
+  background-image: radial-gradient(50% 50%, rgba(0, 68, 153, 0.3333333333), rgba(0, 0, 0, 0));
+}
+.Home .package .gradient.red {
+  background-image: radial-gradient(50% 50%, rgba(187, 34, 51, 0.3333333333), rgba(0, 0, 0, 0));
+}
+.Home .package .gradient.blue {
+  animation: blue 25s linear infinite;
+}
+.Home .package .gradient.purple {
+  animation: purple 25s linear infinite;
+}
+.Home .package .gradient.dark-blue {
+  animation: dark-blue 25s linear infinite;
+}
+.Home .package .gradient.red {
+  animation: red 25s linear infinite;
+}
+.Home .package table {
+  z-index: 1;
+  margin-top: 20px;
+  margin-bottom: 14px;
+  border: none;
+  border-collapse: collapse;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.Home .package table thead {
+  background: purple;
+  color: var(--fg);
+  font-size: 20px;
+  background-image: linear-gradient(to bottom right, #0cf, #0be, #07b, #059);
+}
+.Home .package table thead th {
+  padding-block: 10px;
+}
+.Home .package table tbody {
+  color: var(--fg);
+}
+.Home .package table tbody tr:nth-child(even) {
+  background: rgba(136, 136, 136, 0.1333333333);
+}
+.Home .package table tbody tr {
+  border-radius: 4px;
+}
+.Home .package table tbody td {
+  font-weight: 500;
+  padding-block: 10px;
+  padding-inline: 15px;
+}
+.Home .package table tbody td img {
+  width: 48px;
+}
+.Home .package > span {
+  color: var(--fg);
+  opacity: 0.75;
+  font-size: 12px;
+}
+.Home .community {
+  margin-inline: 16px;
+  width: calc(100% - 32px);
+  background-image: linear-gradient(to bottom right, #0cf, #0be, #07b, #059);
+  border-radius: 8px;
+  padding-block: 15px;
+}
+.Home .community h1 {
+  font-size: 64px;
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 0px;
+}
+.Home .community p {
+  white-space: pre-wrap;
+  color: var(--fg);
+  text-align: center;
+  width: 100%;
+  font-weight: 500;
+  font-size: 18px;
+}
+.Home .community .links {
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+}
+.Home .community .links a {
+  width: 100px;
+  aspect-ratio: 1/1;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.3s;
+  color: var(--fg);
+  text-transform: uppercase;
+  text-decoration: none;
+  font-weight: 600;
+  flex-direction: column;
+  gap: 5px;
+}
+.Home .community .links a:hover {
+  background: rgba(0, 0, 0, 0.1333333333);
+}
+.Home .wiki {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  flex-direction: column;
+  position: relative;
+  margin-top: 10vh;
+}
+.Home .wiki h1 {
+  font-size: 86px;
+  margin: 0;
+}
+.Home .wiki p {
+  color: var(--fg);
+  font-size: 32px;
+  font-weight: 550;
+  text-align: center;
+  width: 70vw;
+}
+.Home .wiki p b {
+  font-weight: 750;
+  color: color-mix(in srgb, var(--fg), #0f94d2);
+}
+.Home .wiki .outer-img {
+  margin-top: 1.3vw;
+  width: 70vw;
+  aspect-ratio: 16/9;
+  border-width: 5px;
+  border-image-slice: 1;
+  border-style: solid;
+  border-image-source: linear-gradient(to bottom right, #0cf, #0be, #07b, #059);
+  border-radius: 8px;
+  transition: 0.4s;
+  background-image: url("/assets/wiki.png");
+  object-fit: contain;
+  background-size: 100% 100%;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+.Home .wiki .outer-img::before {
+  position: absolute;
+  content: "";
+  bottom: -50%;
+  height: 50%;
+  width: 100%;
+  background-image: radial-gradient(50% 100% at 50% 100%, #128daf, rgba(0, 0, 0, 0));
+  transition: 0.4s;
+}
+.Home .wiki .outer-img::after {
+  content: "Discover";
+  background: var(--bg);
+  color: rgba(0, 0, 0, 0);
+  position: absolute;
+  left: 50%;
+  bottom: 0px;
+  opacity: 0;
+  min-height: 20px;
+  min-width: 20px;
+  max-height: 20px;
+  max-width: 20px;
+  font-weight: 600;
+  padding: 0;
+  overflow: hidden;
+  border-radius: 100px;
+  transform: translateX(-50%);
+  transition: 0.3s;
+}
+.Home .wiki .outer-img:hover {
+  transform: scale(1.1);
+  background-size: 110% 110%;
+  background-position: 50% 50%;
+}
+.Home .wiki .outer-img:hover::before {
+  bottom: 0%;
+}
+.Home .wiki .outer-img:hover::after {
+  opacity: 1;
+  color: var(--fg);
+  bottom: 20px;
+  max-height: 1000px;
+  max-width: 1000px;
+  padding: 8px 20px;
+}
+@media (width <= 700px) {
+  .Home .logo main img {
+    height: 192px;
+  }
+  .Home .logo main h1 {
+    font-size: 36px;
+  }
+  .Home .package > h1 {
+    font-size: 36px;
+  }
+  .Home .package .others h2 {
+    font-size: 24px;
+  }
+  .Home .community h1 {
+    font-size: 36px;
+  }
+  .Home .community p {
+    font-size: 16px;
+  }
+  .Home .wiki h1 {
+    font-size: 48px;
+  }
+  .Home .wiki p {
+    font-size: 24px;
+  }
+  .Home .wiki .outer-img {
+    width: 85vw;
+  }
+}
+
+:root {
+  --fg: #fff;
+  --fg-5: #eee;
+  --fg-10: #ddd;
+  --fg-20: #bbb;
+  --bg: #000;
+  --bg-5: #111;
+  --bg-7-5: #191919;
+  --bg-10: #222;
+  --bg-20: #444;
+  --fgcolor: #aaf0ff;
+}
+
+.Wiki {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-items: start;
+  background: var(--bg);
+  color: var(--fg);
+  min-height: 100vh;
+  gap: 1vw;
+}
+.Wiki nav {
+  width: 280px;
+  height: auto;
+  max-height: calc(100vh - 32px - 20px);
+  margin-block: 16px;
+  background: var(--bg-7-5);
+  padding: 10px;
+  border-radius: 8px;
+  overflow: auto;
+}
+.Wiki nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.Wiki nav ul li button {
+  display: none;
+}
+.Wiki nav ul li a {
+  width: 100%;
+  height: 100%;
+  display: block;
+  padding-inline: 12px;
+  padding-block: 4px;
+  width: calc(100% - 24px);
+  border-radius: 6px;
+  transition: 0.1s;
+  color: var(--fg);
+  text-decoration: none;
+  font-weight: 450;
+}
+.Wiki nav ul li a .vector-toc-numb {
+  color: color-mix(in srgb, #0f94d2, var(--fg));
+  font-weight: 600;
+}
+.Wiki nav ul li a .vector-toc-numb::after {
+  content: ". ";
+}
+.Wiki nav ul li a:hover {
+  background: color-mix(in srgb, #0f94d2 20%, var(--bg-10));
+}
+.Wiki nav ul li a:focus {
+  background: linear-gradient(to right, #0f94d2, #059);
+}
+.Wiki nav ul li a:focus .vector-toc-numb {
+  color: black;
+}
+.Wiki nav ul li ul {
+  margin-left: 12px;
+  width: auto;
+}
+.Wiki nav ul li ul li {
+  width: 100%;
+}
+.Wiki .outer-main {
+  max-height: calc(100vh - 16px);
+  overflow: scroll;
+  margin-top: 16px;
+}
+.Wiki main {
+  padding-top: 16px;
+  border-radius: 8px;
+  background: var(--bg-7-5);
+  width: min(1000px, 90vw);
+  padding-inline: 1.5vw;
+  counter-reset: section;
+  padding-bottom: 10px;
+}
+.Wiki main h1 {
+  width: 100%;
+  text-align: center;
+  font-weight: 600;
+  position: relative;
+  font-size: 40px;
+}
+.Wiki main h1::after {
+  content: "";
+  width: calc(100% - 40px);
+  background: var(--fg-20);
+  height: 2px;
+  position: absolute;
+  bottom: -10px;
+  left: 20px;
+}
+.Wiki main h2 {
+  position: relative;
+  counter-increment: section;
+  counter-reset: subsection 0;
+}
+.Wiki main h2::before {
+  color: color-mix(in srgb, #0f94d2, var(--fg));
+  content: counter(section) ". ";
+}
+.Wiki main h2::after {
+  content: "";
+  width: 100%;
+  background: var(--fg-20);
+  height: 3px;
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  opacity: 0.5;
+}
+.Wiki main h3 {
+  counter-increment: subsection;
+  counter-reset: subsubsection 0;
+  margin-top: 25px;
+  margin-bottom: 0px;
+}
+.Wiki main h3::before {
+  color: color-mix(in srgb, #0f94d2, var(--fg));
+  content: counter(section) "." counter(subsection) ". ";
+}
+.Wiki main h4 {
+  counter-increment: subsubsection;
+  counter-reset: subsubsubsection;
+  margin-top: 15px;
+  margin-bottom: 5px;
+}
+.Wiki main h4::before {
+  color: color-mix(in srgb, #0f94d2, var(--fg));
+  content: counter(section) "." counter(subsection) "." counter(subsubsection) ". ";
+}
+.Wiki main h5 {
+  counter-increment: subsubsubsection;
+  counter-reset: subsubsubsubsection;
+  margin-top: 15px;
+  margin-bottom: -5px;
+  font-size: 15px;
+}
+.Wiki main h5::before {
+  color: color-mix(in srgb, #0f94d2, var(--fg));
+  content: counter(section) "." counter(subsection) "." counter(subsubsection) "." counter(subsubsubsection) ". ";
+}
+.Wiki main h6 {
+  counter-increment: subsubsubsubsection;
+  counter-reset: subsubsubsubsubsection;
+  margin-top: 15px;
+  margin-bottom: -6px;
+  font-size: 15px;
+}
+.Wiki main h6::before {
+  color: color-mix(in srgb, #0f94d2, var(--fg));
+  content: counter(section) "." counter(subsection) "." counter(subsubsection) "." counter(subsubsubsection) "." counter(subsubsubsubsection) ". ";
+}
+.Wiki main pre {
+  background: var(--bg-10);
+  padding: 12px;
+  border-radius: 8px;
+  font-family: monospace, monospace;
+  overflow: auto;
+}
+.Wiki main code {
+  background: var(--bg-10);
+  border-radius: 4px;
+  font-size: 14px;
+  padding-inline: 4px;
+  padding-block: 2px;
+  font-family: monospace, monospace;
+}
+.Wiki main .archwiki-template-box {
+  padding: 12px;
+  border-radius: 8px;
+  margin-block: 8px;
+}
+.Wiki main .archwiki-template-box-tip {
+  background: color-mix(in srgb, #6f3 20%, var(--bg-5));
+}
+.Wiki main .archwiki-template-box-warning {
+  background: color-mix(in srgb, #eb3 20%, var(--bg-5));
+}
+.Wiki main a {
+  color: #0f94d2;
+}
+.Wiki main a:visited {
+  color: #805ff2;
+}
+.Wiki .noprint {
+  display: none;
+}
+.Wiki .archwiki-template-meta-related-articles {
+  border-radius: 4px;
+  overflow: hidden;
+}
+.Wiki .archwiki-template-meta-related-articles p {
+  font-weight: 600;
+  display: inline;
+}
+.Wiki .archwiki-template-meta-related-articles p::after {
+  content: ": ";
+}
+.Wiki .archwiki-template-meta-related-articles ul {
+  display: inline-flex;
+  flex-direction: row;
+  gap: 4px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+.Wiki .archwiki-template-meta-related-articles ul li:not(:last-child)::after {
+  content: ",";
+  font-weight: 700;
+}
+.Wiki .wikitable {
+  border-radius: 4px;
+  overflow: hidden;
+}
+.Wiki .wikitable, .Wiki .wikitable td, .Wiki .wikitable th {
+  border: 1.5px solid var(--fg);
+  border-spacing: 0;
+}
+.Wiki .wikitable th {
+  padding-block: 8px;
+  background: var(--bg-20);
+}
+.Wiki .wikitable td {
+  padding: 8px;
+}
+
+:root {
+  --fg: #fff;
+  --fg-5: #eee;
+  --fg-10: #ddd;
+  --fg-20: #bbb;
+  --bg: #000;
+  --bg-5: #111;
+  --bg-7-5: #191919;
+  --bg-10: #222;
+  --bg-20: #444;
+  --fgcolor: #aaf0ff;
+}
+
 body, html {
   padding: 0;
   margin: 0;
@@ -140,4 +885,5 @@ body, html {
 
 button {
   cursor: pointer;
+  border: none;
 }

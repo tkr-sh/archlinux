@@ -1,4 +1,33 @@
 $blue: #0f94d2;
+$visited: #805ff2;
+
+
+:root {
+    --fg: #fff;
+    --fg-5: #eee;
+    --fg-10: #ddd;
+    --fg-20: #bbb;
+    --bg: #000;
+    --bg-5: #111;
+    --bg-7-5: #191919;
+    --bg-10: #222;
+    --bg-20: #444;
+    --fgcolor: #aaf0ff;
+}
+
+
+$fg: var(--fg);
+$fg-5: var(--fg-5);
+$fg-10: var(--fg-10);
+$fg-20: var(--fg-20);
+$bg: var(--bg);
+$bg-5: var(--bg-5);
+$bg-7-5: var(--bg-7-5);
+$bg-10: var(--bg-10);
+$bg-20: var(--bg-20);
+$fgcolor: var(--fgcolor);
+$blue-fg: color-mix(in srgb, $blue, $fg);
+
 
 
 @mixin flex-center {

@@ -1,5 +1,10 @@
 use dioxus::prelude::*;
+use crate::utils::switch_theme::switch_theme;
+
 use super::logo::Logo;
+use super::packages::Packages;
+use super::community::Community;
+use super::wiki::Wiki;
 
 #[component]
 pub fn Home() -> Element {
@@ -34,10 +39,18 @@ pub fn Home() -> Element {
                 }
                 div {
                     "a",
-                    "b"
+                    button {
+                        onclick: |_| switch_theme(),
+                        "Click me!"
+                    }
                 }
             }
             Logo {}
+            Packages {}
+            Community {}
+            Wiki {}
+            footer {
+            }
             "uwu"
             br{}
             "uwu"

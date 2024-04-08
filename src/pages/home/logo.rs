@@ -1,9 +1,12 @@
 use dioxus::prelude::*;
 
+use crate::components::rectbutton::front::Rectbutton;
+
+
 #[component]
 pub fn Logo() -> Element {
     rsx! {
-        div {
+        section {
             class: "logo",
             div { class: "gradient" }
             div {
@@ -55,6 +58,17 @@ pub fn Logo() -> Element {
 r#"Arch linux is a lightweight and flexible
 Linux® distribution created in 2002
 that tries to Keep It Simple."#
+                }
+                div {
+                    class: "buttons",
+                    Rectbutton {
+                        r#type: "white",
+                        text: "Install"
+                    }
+                    Rectbutton {
+                        r#type: "color",
+                        text: "Wiki"
+                    }
                 }
             }
         }

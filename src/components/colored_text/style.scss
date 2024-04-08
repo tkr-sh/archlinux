@@ -1,0 +1,39 @@
+@import "../../style/constants.scss";
+
+.colored-text {
+    background-size: 150% 100%;
+    background-position-x: 0;
+    background-clip: text;
+    color: transparent;
+    transition: .5s;
+
+    &:not(.white) {
+        &:hover {
+            background-position-x: 100%;
+        }
+    }
+
+    &.white {
+        background-image: linear-gradient(to bottom right, $fg, $fg-5, #888);
+    }
+
+    &.black {
+        background-image: linear-gradient(to bottom right, #888, $bg, $bg-5);
+    }
+
+    &.blue {
+        background-image: linear-gradient(to bottom right, #0cf, #0be, #07b, #059);
+    }
+
+    &.dark-blue {
+        background-image: linear-gradient(to bottom right, #08f, #06e, #03b, #019);
+    }
+
+    &.purple {
+        background-image: linear-gradient(to bottom right, #c0f, #b0e, #70b, #509);
+    }
+
+    &.red {
+        background-image: linear-gradient(to bottom right, #f56, #d23, #b12, #801);
+    }
+}

@@ -31,7 +31,7 @@ watch_path = ["src", "public"]
 
 # CSS style file
 
-style = ["style/style.css"]
+style = ["/style/style.css", "https://cdnjs.cloudflare.com/ajax/libs/prism/9000.0.1/themes/prism-tomorrow.min.css"]
 
 # Javascript code file
 script = []

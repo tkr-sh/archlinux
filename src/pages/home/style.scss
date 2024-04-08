@@ -1,7 +1,42 @@
 @import "../../style/constants.scss";
 
+@keyframes blue {
+    0% { opacity: 0.5; }
+    5% { opacity: 1; }
+    20% { opacity: 1; }
+    30% { opacity: 0; }
+    100% { opacity: 0; }
+}
+
+@keyframes purple {
+    0% { opacity: 0; }
+    20% { opacity: 0; }
+    30% { opacity: 1; }
+    45% { opacity: 1; }
+    55% { opacity: 0; }
+    100% { opacity: 0; }
+}
+
+@keyframes dark-blue {
+    0% { opacity: 0; }
+    45% { opacity: 0; }
+    55% { opacity: 1; }
+    70% { opacity: 1; }
+    80% { opacity: 0; }
+    100% { opacity: 0; }
+}
+
+@keyframes red {
+    0% { opacity: 0; }
+    70% { opacity: 0; }
+    80% { opacity: 1; }
+    95% { opacity: 1; }
+    100% { opacity: 0.5; }
+}
+
+
 .Home {
-    background: #000;
+    background: $bg;
 
 
     // The header
@@ -17,7 +52,6 @@
 
         > div {
             backdrop-filter: blur(10px) brightness(0.5);
-            // background: #111;
             width: 20vw;
             color: #fff;
             transition: .3s;
@@ -62,53 +96,55 @@
     // The first page
     .logo {
         height: 100vh;
+        max-height: 100vh;
         width: 100vw;
+        overflow-x: hidden;
+        overflow-y: hidden;
         @include flex-center;
         flex-direction: column;
         position: relative;
 
         // The gradient effect
         .gradient {
-            background-image: radial-gradient(circle at 50% -40%, #128daf, #0000);
-            // filter: blur(100px);
+            background-image: radial-gradient(100% 110% at 50% -45%, #128daf, #0000);
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
-            height: 100%;
+            height: 150%;
         }
 
 
-            // Binary at the left & right
-            .wrap-binary {
-                position: absolute;
-                top: 0;
-                left: 0;
+        // Binary at the left & right
+        .wrap-binary {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 70vw;
+            perspective: 1000px;
+
+            .binary {
                 width: 70vw;
-                perspective: 1000px;
+                color: $fgcolor;
+                font-weight: 600;
+                display: flex;
+                flex-direction: column;
+                font-size: 50px;
+                transform: rotateY(55deg) translate(-10%, -20%);
+                mask: linear-gradient(-45deg, #0000, #0000 33%, #000);
+            }
+
+            &.right {
+                left: auto;
+                right: 0;
 
                 .binary {
-                    width: 70vw;
-                    color: #aaf0ff80;
-                    font-weight: 600;
-                    display: flex;
-                    flex-direction: column;
-                    font-size: 50px;
-                    transform: rotateY(55deg) translate(-10%, -20%);
-                    mask: linear-gradient(-45deg, #0000, #0000 33%, #000);
-                }
-
-                &.right {
-                    left: auto;
-                    right: 0;
-
-                    .binary {
-                        text-align: right;
-                        transform: rotateY(-55deg) translate(20%, -20%);
-                        mask: linear-gradient(45deg, #0000, #0000 33%, #000);
-                    }
+                    text-align: right;
+                    transform: rotateY(-55deg) translate(10%, -20%);
+                    mask: linear-gradient(45deg, #0000, #0000 33%, #000);
                 }
             }
+        }
 
 
 
@@ -138,7 +174,7 @@
                     transition: .5s;
                 }
                 .white {
-                    background-image: linear-gradient(to bottom right,#fff, #eee, #888);
+                    background-image: linear-gradient(to bottom right, $fg, $fg-5, #888);
                 }
 
                 .blue {
@@ -151,13 +187,329 @@
             }
 
             p {
-                color: #fffd;
+                color: $fg;
+                opacity: 0.8;
+
                 font-weight: 500;
                 white-space: pre;
                 text-align: center;
             }
 
-            button {
+            .buttons {
+                margin-top: 10px;
+                display: flex;
+                gap: 16px;
+            }
+        }
+    }
+
+
+
+    // Second page with package
+    .package {
+        @include flex-center;
+        width: 100vw;
+        height: 100vh;
+        flex-direction: column;
+        position: relative;
+        overflow: hidden;
+
+        h1 {
+            color: $fg;
+            font-size: 75px;
+            margin-block: 2px;
+        }
+
+        .others {
+            h2 {
+                margin-block: 2px;
+            }
+        }
+
+        .gradient {
+            background-image: radial-gradient(50% 50%, #128daf50, #0000);
+            position: absolute;
+            top: 0;
+            left: 50%;
+            height: 100%;
+            aspect-ratio: 1.4/1;
+            transform: translate(-50%);
+
+            @mixin color-animation($color) {
+                &.#{$color} {
+                    animation: #{$color} 25s linear infinite;
+                }
+            }
+
+            &.purple {
+                background-image: radial-gradient(50% 50%, #87c5, #0000);
+            }
+
+            &.dark-blue {
+                background-image: radial-gradient(50% 50%, #0495, #0000);
+            }
+
+            &.red {
+                background-image: radial-gradient(50% 50%, #b235, #0000);
+            }
+
+            @include color-animation(blue);
+            @include color-animation(purple);
+            @include color-animation(dark-blue);
+            @include color-animation(red);
+        }
+
+
+        table {
+            z-index: 1;
+            margin-top: 20px;
+            margin-bottom: 14px;
+            border: none;
+            border-collapse: collapse;
+            border-radius: 10px;
+            overflow: hidden;
+
+            thead {
+                background: purple;
+                color: $fg;
+                font-size: 20px;
+                background-image: linear-gradient(to bottom right, #0cf, #0be, #07b, #059);
+                th {
+                    padding-block: 10px;
+                }
+            }
+            tbody {
+                color: $fg;
+                tr:nth-child(even) {
+                    background: #8882;
+                }
+
+                tr {
+                    border-radius: 4px;
+                }
+
+                td {
+                    font-weight: 500;
+                    padding-block: 10px;
+                    padding-inline: 15px;
+
+                    img {
+                        width: 48px;
+                    }
+                }
+            }
+        }
+
+        > span {
+            color: $fg;
+            opacity: 0.75;
+            font-size: 12px;
+        }
+    }
+
+
+    // Third section
+    .community {
+        $m-i: 16px;
+        margin-inline: $m-i;
+        width: calc(100% - $m-i * 2);
+        background-image: linear-gradient(to bottom right, #0cf, #0be, #07b, #059);
+        border-radius: 8px;
+        padding-block: 15px;
+
+        h1 {
+            font-size: 64px;
+            text-align: center;
+            margin-top: 30px;
+            margin-bottom: 0px;
+        }
+
+        p {
+            white-space: pre-wrap;
+            color: $fg;
+            text-align: center;
+            width: 100%;
+            font-weight: 500;
+            font-size: 18px;
+        }
+
+        .links {
+            display: flex;
+            width: 100%;
+            justify-content: space-evenly;
+
+            a {
+                width: 100px;
+                aspect-ratio: 1/1;
+                border-radius: 8px;
+                @include flex-center;
+                transition: .3s;
+                color: $fg;
+                text-transform: uppercase;
+                text-decoration: none;
+                font-weight: 600;
+                flex-direction: column;
+                gap: 5px;
+
+                &:hover {
+                    background: #0002;
+                }
+            }
+        }
+    }
+
+
+    // Fourth section
+    .wiki {
+        @include flex-center;
+        width: 100vw;
+        height: 100vh;
+        flex-direction: column;
+        position: relative;
+        margin-top: 10vh;
+
+        h1 {
+            font-size: 86px;
+            margin: 0;
+        }
+
+        p {
+            color: $fg;
+            font-size: 32px;
+            font-weight: 550;
+            text-align: center;
+            width: 70vw;
+
+            b {
+                font-weight: 750;
+                color: color-mix(in srgb, $fg, $blue);
+            }
+        }
+
+        .outer-img {
+            margin-top: 1.3vw;
+            width: 70vw;
+            aspect-ratio: 16/9;
+            border-width: 5px;
+            border-image-slice: 1;
+            border-style: solid;
+            border-image-source: linear-gradient(to bottom right, #0cf, #0be, #07b, #059);
+            border-radius: 8px;
+            transition: .4s;
+            background-image: url("/assets/wiki.png");
+            object-fit: contain;
+            background-size: 100% 100%;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+
+            // The light
+            &::before {
+                position: absolute;
+                content: "";
+                bottom: -50%;
+                height: 50%;
+                width: 100%;
+                background-image: radial-gradient(50% 100% at 50% 100%, #128daf, #0000);
+                transition: .4s;
+            }
+
+            // The "button"
+            &::after {
+                content: "Discover";
+                background: $bg;
+                color: #0000;
+                position: absolute;
+                left: 50%;
+                bottom: 0px;
+                opacity: 0;
+                $s: 20px;
+                min-height: $s;
+                min-width: $s;
+                max-height: $s;
+                max-width: $s;
+                font-weight: 600;
+                padding: 0;
+                overflow: hidden;
+                border-radius: 100px;
+                transform: translateX(-50%);
+                transition: .3s;
+            }
+
+            &:hover {
+                transform: scale(1.1);
+                background-size: 110% 110%;
+                background-position: 50% 50%;
+
+                &::before {
+                    bottom: 0%;
+                }
+
+                &::after {
+                    opacity: 1;
+                    color: $fg;
+                    bottom: 20px;
+                    max-height: 1000px;
+                    max-width: 1000px;
+                    padding: 8px 20px;
+                }
+            }
+
+        }
+        // img {
+        //     height: 46vh;
+        //     border-width: 5px;
+        //     border-image-slice: 1;
+        //     border-style: solid;
+        //     border-image-source: linear-gradient(to bottom right, #0cf, #0be, #07b, #059);
+        //     border-radius: 8px;
+        //     transition: .4s;
+        // }
+    }
+
+    @media (width <= 700px) {
+        .logo {
+            main {
+                // Arch logo
+                img {
+                    height: 192px;
+                }
+
+                h1 {
+                    font-size: 36px;
+                }
+            }
+        }
+
+        .package {
+            > h1 {
+                font-size: 36px;
+            }
+            .others {
+                h2 {
+                    font-size: 24px;
+                }
+            }
+        }
+
+        .community {
+            h1 {
+                font-size: 36px;
+            }
+            p {
+                font-size: 16px;
+            }
+        }
+
+        .wiki {
+            h1 {
+                font-size: 48px;
+            }
+            p {
+                font-size: 24px;
+            }
+            .outer-img {
+                width: 85vw;
             }
         }
     }

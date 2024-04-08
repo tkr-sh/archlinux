@@ -1,16 +1,23 @@
 #![allow(non_snake_case)]
 
 use dioxus::prelude::*;
+// use dioxus_fullstack::prelude::*;
 use log::LevelFilter;
 
 mod pages;
+mod components;
+mod utils;
+mod layout;
 use pages::home::front::Home;
+use pages::wiki::front::Wiki;
 
 
 #[derive(Clone, Routable, Debug, PartialEq, serde::Serialize, serde::Deserialize)]
 enum Route {
     #[route("/")]
     Home {},
+    #[route("/wiki/:name")]
+    Wiki { name: String },
     #[route("/blog/:id")]
     Blog { id: i32 },
 }

@@ -1,0 +1,300 @@
+@import "../../style/constants.scss";
+
+.Wiki {
+    @include flex-center;
+    align-items: start;
+    background: $bg;
+    color: $fg;
+    min-height: 100vh;
+    gap: 1vw;
+
+    $m-y: 16px;
+
+    nav {
+        $p: 10px;
+        width: calc(300px - $p * 2);
+        height: auto;
+        max-height: calc(100vh - $m-y * 2 - $p * 2);
+        margin-block: $m-y;
+        background: $bg-7-5;
+        padding: $p;
+        border-radius: 8px;
+        overflow: auto;
+
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+
+            li {
+                button {
+                    display: none;
+                }
+
+                a {
+                    width: 100%;
+                    height: 100%;
+                    display: block;
+
+                    $p-i: 12px;
+                    padding-inline: $p-i;
+                    padding-block: 4px;
+                    width: calc(100% - 2 * $p-i);
+                    border-radius: 6px;
+
+                    transition: .1s;
+
+                    color: $fg;
+                    text-decoration: none;
+                    font-weight: 450;
+
+                    .vector-toc-numb {
+                        color: $blue-fg;
+                        font-weight: 600;
+                        &::after {
+                            content: ". ";
+                        }
+                    }
+
+                    &:hover {
+                        background: color-mix(in srgb, $blue 20%, $bg-10);
+                    }
+
+                    &:focus {
+                        background: linear-gradient(to right, $blue, #059);
+                        .vector-toc-numb {
+                            color: black;
+                        }
+                    }
+
+                }
+
+                ul {
+                    margin-left: 12px;
+                    width: auto;
+
+                    li {
+                        width: 100%;
+                    }
+                }
+            }
+        }
+    }
+
+    .outer-main {
+        max-height: calc(100vh - $m-y);
+        overflow: scroll;
+        margin-top: $m-y;
+    }
+
+    main {
+        padding-top: 16px;
+        border-radius: 8px;
+        $p-i: 1.5vw;
+        background: $bg-7-5;
+        width: min(1000px, 90vw);
+        padding-inline: $p-i;
+
+        h1 {
+            width: 100%;
+            text-align: center;
+            font-weight: 600;
+            position: relative;
+            font-size: 40px;
+
+            &::after {
+                content: "";
+                $left: 20px;
+                width: calc(100% - $left * 2);
+                background: $fg-20;
+                height: 2px;
+                position: absolute;
+                bottom: -10px;
+                left: $left;
+            }
+        }
+
+
+
+
+        ///////////////////////////////////////////
+        // Everything linked to section and h<n> //
+        ///////////////////////////////////////////
+        counter-reset: section;
+
+        h2 {
+            position: relative;
+            counter-increment: section;
+            counter-reset: subsection 0;
+
+            &::before {
+                color: $blue-fg;
+                content: counter(section) ". ";
+            }
+
+            &::after {
+                content: "";
+                width: 100%;
+                background: $fg-20;
+                height: 3px;
+                position: absolute;
+                bottom: -10px;
+                left: 0;
+                opacity: 0.5;
+            }
+        }
+
+        h3 {
+            counter-increment: subsection;
+            counter-reset: subsubsection 0;
+            margin-top: 25px;
+            margin-bottom: 0px;
+
+            &::before {
+                color: $blue-fg;
+                content: counter(section) "." counter(subsection) ". ";
+            }
+        }
+
+        h4 {
+            counter-increment: subsubsection;
+            counter-reset: subsubsubsection;
+            margin-top: 15px;
+            margin-bottom: 5px;
+
+            &::before {
+                color: $blue-fg;
+                content: counter(section) "." counter(subsection) "." counter(subsubsection) ". ";
+            }
+        }
+
+        h5 {
+            counter-increment: subsubsubsection;
+            counter-reset: subsubsubsubsection;
+            margin-top: 15px;
+            margin-bottom: -5px;
+            font-size: 15px;
+
+            &::before {
+                color: $blue-fg;
+                content: counter(section) "." counter(subsection) "." counter(subsubsection) "." counter(subsubsubsection) ". ";
+            }
+        }
+
+        h6 {
+            counter-increment: subsubsubsubsection;
+            counter-reset: subsubsubsubsubsection;
+            margin-top: 15px;
+            margin-bottom: -6px;
+            font-size: 15px;
+
+            &::before {
+                color: $blue-fg;
+                content: counter(section) "." counter(subsection) "." counter(subsubsection) "." counter(subsubsubsection) "." counter(subsubsubsubsection) ". ";
+            }
+        }
+
+
+
+        // Pre tags
+        pre {
+            background: $bg-10;
+            padding: 12px;
+            border-radius: 8px;
+            font-family: monospace,monospace;
+            overflow: auto;
+        }
+
+        code {
+            background: $bg-10;
+            border-radius: 4px;
+            font-size: 14px;
+            padding-inline: 4px;
+            padding-block: 2px;
+            font-family: monospace,monospace;
+        }
+
+        .archwiki-template-box {
+            padding: 12px;
+            border-radius: 8px;
+            margin-block: 8px;
+        }
+
+        .archwiki-template-box-tip {
+            background: color-mix(in srgb, #6f3 20%, $bg-5);
+        }
+
+        .archwiki-template-box-warning {
+            background: color-mix(in srgb, #eb3 20%, $bg-5);
+        }
+
+        a {
+            color: $blue;
+
+            &:visited {
+                color: $visited;
+            }
+        }
+
+        padding-bottom: 10px;
+    }
+
+
+    .noprint {
+        display: none;
+    }
+
+    .archwiki-template-meta-related-articles {
+        // float: right;
+        border-radius: 4px;
+        overflow: hidden;
+
+        p {
+            font-weight: 600;
+            display: inline;
+
+            &::after {
+                content: ": "
+            }
+        }
+
+        ul {
+            display: inline-flex;
+            flex-direction: row;
+            gap: 4px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+
+            li:not(:last-child)::after {
+                content: ",";
+                font-weight: 700;
+            }
+        }
+    }
+
+    .wikitable {
+        border-radius: 4px;
+        overflow: hidden;
+
+        &, td, th {
+            border: 1.5px solid $fg;
+            border-spacing: 0;
+        }
+
+        th {
+            padding-block: 8px;
+            background: $bg-20;
+        }
+
+        td {
+            padding: 8px;
+        }
+    }
+}

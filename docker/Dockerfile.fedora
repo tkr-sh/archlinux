@@ -1,0 +1,8 @@
+# Use the latest Fedora base image
+FROM fedora:latest
+
+# Update package lists
+RUN dnf makecache
+
+# Execute the script to count Fedora packages
+CMD ["dnf", "repoquery", "--quiet", "--available", "|", "wc", "-l"]
