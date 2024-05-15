@@ -653,7 +653,7 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 6px;
 }
 .Wiki nav ul li button {
   display: none;
@@ -663,7 +663,7 @@
   height: 100%;
   display: block;
   padding-inline: 12px;
-  padding-block: 4px;
+  padding-block: 6px;
   width: calc(100% - 24px);
   border-radius: 6px;
   transition: 0.1s;
@@ -859,6 +859,54 @@
 }
 .Wiki .wikitable td {
   padding: 8px;
+}
+
+:root {
+  --fg: #fff;
+  --fg-5: #eee;
+  --fg-10: #ddd;
+  --fg-20: #bbb;
+  --bg: #000;
+  --bg-5: #111;
+  --bg-7-5: #191919;
+  --bg-10: #222;
+  --bg-20: #444;
+  --fgcolor: #aaf0ff;
+}
+
+.WikiCategory {
+  background: var(--bg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-items: start;
+  background: var(--bg);
+  color: var(--fg);
+  min-height: 100vh;
+  gap: 1vw;
+}
+.WikiCategory main {
+  padding-top: 16px;
+  border-radius: 8px;
+  background: var(--bg-7-5);
+  width: min(1000px, 90vw);
+  padding-inline: 1.5vw;
+}
+.WikiCategory main h1 {
+  width: 100%;
+  text-align: center;
+  font-weight: 600;
+  position: relative;
+  font-size: 40px;
+}
+.WikiCategory main h1::after {
+  content: "";
+  width: calc(100% - 40px);
+  background: var(--fg-20);
+  height: 2px;
+  position: absolute;
+  bottom: -10px;
+  left: 20px;
 }
 
 :root {

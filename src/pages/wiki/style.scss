@@ -1,4 +1,6 @@
 @import "../../style/constants.scss";
+@import "./common.scss";
+
 
 .Wiki {
     @include flex-center;
@@ -28,7 +30,7 @@
             width: 100%;
             display: flex;
             flex-direction: column;
-            gap: 4px;
+            gap: 6px;
 
             li {
                 button {
@@ -42,7 +44,7 @@
 
                     $p-i: 12px;
                     padding-inline: $p-i;
-                    padding-block: 4px;
+                    padding-block: 6px;
                     width: calc(100% - 2 * $p-i);
                     border-radius: 6px;
 
@@ -99,26 +101,7 @@
         width: min(1000px, 90vw);
         padding-inline: $p-i;
 
-        h1 {
-            width: 100%;
-            text-align: center;
-            font-weight: 600;
-            position: relative;
-            font-size: 40px;
-
-            &::after {
-                content: "";
-                $left: 20px;
-                width: calc(100% - $left * 2);
-                background: $fg-20;
-                height: 2px;
-                position: absolute;
-                bottom: -10px;
-                left: $left;
-            }
-        }
-
-
+        @include wiki-title;
 
 
         ///////////////////////////////////////////

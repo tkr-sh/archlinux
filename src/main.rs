@@ -1,23 +1,29 @@
 #![allow(non_snake_case)]
 
 use dioxus::prelude::*;
+use crate::layout::app_layout::front::AppLayout;
 // use dioxus_fullstack::prelude::*;
 use log::LevelFilter;
 
 mod pages;
 mod components;
 mod utils;
+mod shared;
 mod layout;
 use pages::home::front::Home;
 use pages::wiki::front::Wiki;
+use pages::wiki::category::front::WikiCategory;
 
 
 #[derive(Clone, Routable, Debug, PartialEq, serde::Serialize, serde::Deserialize)]
 enum Route {
     #[route("/")]
     Home {},
+    // TODO
     #[route("/wiki/:name")]
     Wiki { name: String },
+    #[route("/wiki/category/:name")]
+    WikiCategory { name: String },
     #[route("/blog/:id")]
     Blog { id: i32 },
 }

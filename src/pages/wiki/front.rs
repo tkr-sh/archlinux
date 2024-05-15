@@ -1,4 +1,5 @@
 use dioxus::prelude::*;
+use serde::{Deserialize, Serialize};
 
 use crate::utils::switch_theme::switch_theme;
 
@@ -6,56 +7,34 @@ use crate::utils::switch_theme::switch_theme;
 pub fn Wiki(name: String) -> Element {
     switch_theme();
     switch_theme();
+
     let name_signal = use_signal(|| name.clone().replace("_", " "));
-    // let mut body_signal = use_signal(|| String::new());
-    let mut body_signal = use_resource(move || async move {
+
+    let ssr_body = use_server_future(move || async move {
         get_wiki_page(name_signal())
             .await
-            .replace("href=\"/title/", "href=\"/wiki/")
-            .replace("/images/0/0b/Inaccurate.svg", "/assets/warn.svg")
+            .unwrap()
     });
 
-    let toc = use_resource(move || async move {
-        get_toc_page(name_signal())
-            .await
-            .replace("href=\"/title/", "href=\"/wiki/")
-            .replace("/images/0/0b/Inaccurate.svg", "/assets/warn.svg")
-    });
-
-    // Fedora
-    // use_effect(move || {
-    //     println!("{name_signal}");
-    //     use_future(move || async move {
-    //         println!("HEYYYYYYYYYYYYYYYYYYYYYYY");
-    //         let body = get_wiki_page(name_signal()).await;
-    //         println!("{body}");
-    //         body_signal.set(body);
-    //         println!("{body_signal}");
-    //         println!("{body_signal}");
-    //         println!("{body_signal}");
-    //         println!("{body_signal}");
-    //         println!("{body_signal}");
-    //     });
-    // });
-
-    // use_resource(future)
 
     rsx! {
         div {
             class: "Wiki",
-            nav {
-                ul {
-                    dangerous_inner_html: toc
+            if let Some(toc) = ssr_body.unwrap().read_unchecked().as_ref() {
+                nav {
+                    ul {
+                        dangerous_inner_html: toc.toc.clone(),
+                    }
                 }
             }
             div {
                 class: "outer-main",
                 main {
                     h1 {"{name_signal}"}
-                    match body_signal.read_unchecked().as_ref() {
+                    match ssr_body.unwrap().read_unchecked().as_ref() {
                         Some(s) => rsx! { div {
                             id: "body",
-                            dangerous_inner_html: s.to_string(),
+                            dangerous_inner_html: s.body.clone(),
                         }
                         },
                         None => None,
@@ -67,37 +46,45 @@ pub fn Wiki(name: String) -> Element {
 }
 
 
-// #[server(GetWikiki)]
-async fn get_wiki_page(name: String) -> String {
-    println!("name : {name}");
-    // let html = reqwest::get(&format!("https://wiki.archlinux.org/title/{name}")).await?.text().await?;
-    let html = reqwest::get(&format!("http://localhost:8081/{name}")).await.unwrap().text().await.unwrap();
-    let dom = tl::parse(&html, tl::ParserOptions::default()).unwrap();
-    let parser = dom.parser();
-    println!("{html}");
-    let element = dom.get_element_by_id("bodyContent")
-        .expect("Failed to find element")
-        .get(parser)
-        .unwrap();
-
-    println!("element > {element:#?} <");
-
-    element.inner_html(parser).to_string().replace("\t", "")
+// Data containig the body and the table of content
+#[derive(Serialize, Deserialize)]
+pub struct DataFromServer {
+    body: String,
+    toc: String,
 }
 
-async fn get_toc_page(name: String) -> String {
-    println!("name : {name}");
-    // let html = reqwest::get(&format!("https://wiki.archlinux.org/title/{name}")).await?.text().await?;
+
+#[server(GetWikiki)]
+async fn get_wiki_page(name: String) -> Result<DataFromServer, ServerFnError> {
+    // In a first place get the HTML
     let html = reqwest::get(&format!("http://localhost:8081/{name}")).await.unwrap().text().await.unwrap();
+
+    // Initalize the dom with tl
     let dom = tl::parse(&html, tl::ParserOptions::default()).unwrap();
+
+    // Create a parsedr
     let parser = dom.parser();
-    println!("{html}");
-    let element = dom.get_element_by_id("mw-panel-toc-list")
+
+    // Get the raw html of the body
+    let body = dom.get_element_by_id("bodyContent")
         .expect("Failed to find element")
         .get(parser)
-        .unwrap();
+        .unwrap()
+        .inner_html(parser)
+        .to_string()
+        .replace("\t", "")
+        .replace("href=\"/title/", "href=\"/wiki/")
+        .replace("/images/0/0b/Inaccurate.svg", "/assets/warn.svg");
 
-    println!("element > {element:#?} <");
+    // Get the raw HTML of the navbar
+    let toc = dom.get_element_by_id("mw-panel-toc-list")
+        .expect("Failed to find element")
+        .get(parser)
+        .unwrap()
+        .inner_html(parser)
+        .to_string()
+        .replace("\t", "");
 
-    element.inner_html(parser).to_string().replace("\t", "")
+
+    Ok(DataFromServer { toc, body })
 }

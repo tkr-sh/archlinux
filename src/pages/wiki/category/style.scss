@@ -1,0 +1,26 @@
+@import "../../../style/constants.scss";
+@import "../common.scss";
+
+.WikiCategory {
+    background: $bg;
+    @include flex-center;
+    align-items: start;
+    background: $bg;
+    color: $fg;
+    min-height: 100vh;
+    gap: 1vw;
+
+    $m-y: 16px;
+
+
+    main {
+        @include wiki-title;
+
+        padding-top: 16px;
+        border-radius: 8px;
+        $p-i: 1.5vw;
+        background: $bg-7-5;
+        width: min(1000px, 90vw);
+        padding-inline: $p-i;
+    }
+}

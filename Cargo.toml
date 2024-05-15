@@ -22,6 +22,7 @@ tl = "0.7.8"
 regex = "1.10.4"
 tokio =  "1.37.0"
 async-std = "1.12.0"
+itertools = "0.12.1"
 
 
 [features]
